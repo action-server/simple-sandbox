@@ -2,7 +2,7 @@
 
 # Inspired by <https://wiki.gentoo.org/wiki/Simple_sandbox>
 
-# Author:       Ahmed Elhori <dev@elhori.com>
+# Author:       Action <dev@action-server.com>
 # License:      GNU GPLv3
 # Description:  A simple sandbox for every application
 
@@ -56,7 +56,7 @@ create_executable(){
 	cat <<- EOF > /usr/local/bin/"$sandbox_pkg_name"
 		#!/bin/sh
 
-		xhost si:localuser:${sandbox_user} && sudo -u ${sandbox_user} ${pkg_name} "\$@"
+		xhost si:localuser:${sandbox_user} && sudo -u ${sandbox_user} sh -c "PULSE_SERVER='tcp:127.0.0.1:4713' ${pkg_name} "\$@""
 	EOF
 
 	chown "$main_user":"$main_user" /usr/local/bin/"$sandbox_pkg_name"
